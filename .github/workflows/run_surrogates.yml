@@ -1,0 +1,63 @@
+name: Run Surrogate Models
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: "Release tag that contains the CSV (e.g., v1.0)"
+        required: true
+        default: "v1.0"
+      asset_name:
+        description: "CSV filename in the release assets (e.g., dataproject2025.csv)"
+        required: true
+        default: "dataproject2025.csv"
+  push:
+    branches: ["Step1-Wenlei"]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install deps
+        run: |
+          pip install -U pip
+          pip install -r surrogate/requirements.txt
+
+      - name: Download CSV from Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.event.repository.name }}
+          TAG: ${{ github.event.inputs.release_tag || 'v1.0' }}
+          ASSET: ${{ github.event.inputs.asset_name || 'dataproject2025.csv' }}
+        run: |
+          mkdir -p data
+          URL="https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${ASSET}"
+          echo "Downloading: $URL"
+          curl -H "Authorization: token ${GH_TOKEN}" -L -o "data/${ASSET}" "$URL" || exit 1
+          ls -lh data
+
+      - name: Run surrogate script
+        working-directory: surrogate
+        run: |
+          python run_surrogates.py \
+            --csv "../data/${{ github.event.inputs.asset_name || 'dataproject2025.csv' }}" \
+            --drop-grade \
+            --depth 4 --leaf 100 --logitC 0.5
+
+      - name: Save outputs
+        run: |
+          mkdir -p out
+          echo "Run finished at: $(date -u)" > out/metadata.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: surrogate-results
+          path: out/
