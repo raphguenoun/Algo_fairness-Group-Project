@@ -17,20 +17,23 @@ on:
 jobs:
   run:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
           cache: "pip"
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           pip install -U pip
-          pip install -r surrogate/requirements.txt
+          pip install -r requirements.txt
 
-      - name: Download CSV from Release
+      - name: Download CSV from Release (private-friendly)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.repository_owner }}
@@ -41,14 +44,21 @@ jobs:
           mkdir -p data
           URL="https://github.com/${OWNER}/${REPO}/releases/download/${TAG}/${ASSET}"
           echo "Downloading: $URL"
-          curl -H "Authorization: token ${GH_TOKEN}" -L -o "data/${ASSET}" "$URL" || exit 1
+          curl -H "Authorization: token ${GH_TOKEN}" -L -o "data/${ASSET}" "$URL"
           ls -lh data
 
+      # Optional fallback to a small sample in repo root if release asset missing
+      - name: Fallback to sample if release not available
+        if: failure()
+        run: |
+          echo "Release asset not found, using sample.csv fallback."
+          mkdir -p data
+          cp sample.csv "data/${{ github.event.inputs.asset_name || 'dataproject2025.csv' }}"
+
       - name: Run surrogate script
-        working-directory: surrogate
         run: |
           python run_surrogates.py \
-            --csv "../data/${{ github.event.inputs.asset_name || 'dataproject2025.csv' }}" \
+            --csv "data/${{ github.event.inputs.asset_name || 'dataproject2025.csv' }}" \
             --drop-grade \
             --depth 4 --leaf 100 --logitC 0.5
 
@@ -57,7 +67,9 @@ jobs:
           mkdir -p out
           echo "Run finished at: $(date -u)" > out/metadata.txt
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
         with:
           name: surrogate-results
           path: out/
+
