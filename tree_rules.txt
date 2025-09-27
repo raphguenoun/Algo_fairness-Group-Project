@@ -1,0 +1,22 @@
+|--- int_rate <= 14.39
+|   |--- int_rate <= 10.74
+|   |   |--- sub_grade <= 11.50
+|   |   |   |--- value: [0.10]
+|   |   |--- sub_grade >  11.50
+|   |   |   |--- value: [0.05]
+|   |--- int_rate >  10.74
+|   |   |--- sub_grade <= 5.50
+|   |   |   |--- value: [0.14]
+|   |   |--- sub_grade >  5.50
+|   |   |   |--- value: [0.20]
+|--- int_rate >  14.39
+|   |--- loan duration <= 0.50
+|   |   |--- sub_grade <= 11.50
+|   |   |   |--- value: [0.21]
+|   |   |--- sub_grade >  11.50
+|   |   |   |--- value: [0.28]
+|   |--- loan duration >  0.50
+|   |   |--- sub_grade <= 11.50
+|   |   |   |--- value: [0.28]
+|   |   |--- sub_grade >  11.50
+|   |   |   |--- value: [0.39]
