@@ -1,0 +1,6 @@
+Saved: 2025-09-27T03:14:20.020436
+Data path: dataproject2025.csv
+Train shape: (868988, 36) | Test shape: (217248, 36)
+ROC-AUC: 0.724064 | PR-AUC: 0.411374
+Scale_pos_weight: 3.7506970336434904
+Excluded sensitive cols: False
