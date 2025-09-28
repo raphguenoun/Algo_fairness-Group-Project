@@ -1,0 +1,14 @@
+{
+  "data_path": "dataproject2025.csv",
+  "model_path": "outputs_step2/xgb_step2_model.joblib",
+  "meta_txt_path": "outputs_step2/Step_2 Meta.txt",
+  "n_repeats": 10,
+  "random_state": 42,
+  "test_size": 0.2,
+  "topk_plot": 15,
+  "exclude_sensitive": false,
+  "sensitive_cols": [
+    "Pct_afro_american"
+  ],
+  "used_presaved_test": true
+}
