@@ -17,3 +17,4 @@ torchaudio
 polars
 lightgbm
 pyarrow
+xgboost
