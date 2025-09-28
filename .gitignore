@@ -1,0 +1,18 @@
+# OS / IDE
+.DS_Store
+.ipynb_checkpoints/
+.vscode/
+__pycache__/
+*.pyc
+
+# env & secrets
+.env
+.venv/
+algo_fairness_project/
+
+
+# data: non versionnées (on garde les .gitkeep)
+data/raw/**
+data/interim/**
+data/processed/**
+!data/**/.gitkeep
