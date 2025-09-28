@@ -8,6 +8,8 @@ __pycache__/
 # env & secrets
 .env
 .venv/
+algo_fairness_project/
+
 
 # data: non versionnées (on garde les .gitkeep)
 data/raw/**
