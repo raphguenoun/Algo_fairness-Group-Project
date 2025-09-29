@@ -1,0 +1,19 @@
+{
+  "valid_auc": 0.7086752237184363,
+  "valid_pr_auc": 0.38714748734489834,
+  "valid_best_f1": 0.44369508866102353,
+  "valid_best_threshold": 0.4977637860154656,
+  "test_auc": 0.6868485372804578,
+  "test_pr_auc": 0.3789171051499221,
+  "test_f1_at_best_valid_th": 0.42800338642191516,
+  "test_confusion_matrix_at_best_valid_th": [
+    [
+      304635,
+      133331
+    ],
+    [
+      53820,
+      70019
+    ]
+  ]
+}

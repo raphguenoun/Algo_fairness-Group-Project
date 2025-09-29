@@ -1,0 +1,22 @@
+[
+  "issue_d",
+  "loan_duration",
+  "annual_inc",
+  "avg_cur_bal",
+  "bc_open_to_buy",
+  "bc_util",
+  "delinq_2yrs",
+  "dti",
+  "emp_length",
+  "purpose",
+  "revol_bal",
+  "revol_util",
+  "sub_grade",
+  "tax_liens",
+  "emp_len_years",
+  "sub_grade_ord",
+  "revol_to_inc",
+  "cur_to_openbuy",
+  "log_annual_inc",
+  "dti_clip"
+]
