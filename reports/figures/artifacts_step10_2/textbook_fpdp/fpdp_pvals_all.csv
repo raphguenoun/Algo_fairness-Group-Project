@@ -1,0 +1,23 @@
+feature,grid_x,p_value
+int_rate,6.99,0.504
+int_rate,10.49,0.526
+int_rate,13.33,0.536
+int_rate,16.91,0.48
+int_rate,23.1,0.496
+funded_amnt,3600.0,0.516
+funded_amnt,8350.0,0.502
+funded_amnt,14400.0,0.514
+funded_amnt,22000.0,0.49
+funded_amnt,35000.0,0.482
+loan duration,0.0,0.49
+loan duration,1.0,0.488
+issue_d,2013.0,0.482
+issue_d,2015.0,0.49
+issue_d,2016.0,0.528
+issue_d,2017.0,0.506
+issue_d,2018.0,0.494
+dti,5.1,0.498
+dti,12.06,0.488
+dti,17.92,0.532
+dti,24.42,0.506
+dti,32.96,0.51

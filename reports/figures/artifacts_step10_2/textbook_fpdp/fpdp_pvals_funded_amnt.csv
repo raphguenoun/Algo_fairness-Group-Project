@@ -1,0 +1,6 @@
+feature,grid_x,p_value
+funded_amnt,3600.0,0.516
+funded_amnt,8350.0,0.502
+funded_amnt,14400.0,0.514
+funded_amnt,22000.0,0.49
+funded_amnt,35000.0,0.482
